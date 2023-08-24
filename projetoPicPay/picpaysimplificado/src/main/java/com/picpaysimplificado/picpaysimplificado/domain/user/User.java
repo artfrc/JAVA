@@ -2,8 +2,6 @@ package com.picpaysimplificado.picpaysimplificado.domain.user;
 
 import java.math.BigDecimal;
 
-import org.hibernate.usertype.UserType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,8 +17,8 @@ import lombok.Setter;
 
 @Entity(name = "users") // para representar uma entidade do banco de dados
 @Table // para representar uma tabela do banco de dados
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor // cria um construtor com todos os atributos da classe
 @EqualsAndHashCode(of="id") // chave primária dessa entidade/tabela
 
