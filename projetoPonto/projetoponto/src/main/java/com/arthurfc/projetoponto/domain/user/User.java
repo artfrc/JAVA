@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(of="id") // chave primárira dessa tabela
+@AllArgsConstructor // cria um construtor com todos os atributos da classe
 public class User {
     
     @Id
@@ -31,7 +33,7 @@ public class User {
     private String email;
 
     @Column(unique = true)
-    private String document;
+    private String document; // cpf
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
