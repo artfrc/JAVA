@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "transactions")
@@ -22,6 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor // Não irei precisar passar parâmetros para o construtor pois irei setar os valores manualmente
 @EqualsAndHashCode(of="id")
 
 public class Transaction {
@@ -30,8 +32,8 @@ public class Transaction {
     private Long id;
     private BigDecimal amount;
 
-    @ManyToOne // um usuário pode ter várias transacoes, mas uma transacao só pode ter um sender e um
-    @JoinColumn(name = "sender_id") // receiver
+    @ManyToOne // um usuário pode ter várias transacoes, mas uma transacao só pode ter um sender e um receiver
+    @JoinColumn(name = "sender_id")
     private User sender;
 
     @ManyToOne
