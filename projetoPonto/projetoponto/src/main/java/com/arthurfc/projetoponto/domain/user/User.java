@@ -1,5 +1,7 @@
 package com.arthurfc.projetoponto.domain.user;
 
+import com.arthurfc.projetoponto.dtos.UserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "users")
@@ -19,6 +22,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of="id") // chave primárira dessa tabela
 @AllArgsConstructor // cria um construtor com todos os atributos da classe
+@NoArgsConstructor
 public class User {
     
     @Id
@@ -37,4 +41,17 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    public User(UserDTO data) {
+        this.name = data.name();
+        this.salary = data.salary();
+        this.document = data.document();
+        this.userType = data.userType();
+        this.email = data.email();
+        if(data.userType() == UserType.TRAINEE) {
+            this.workHoursDay = 6; 
+        } else {
+            this.workHoursDay = 8;
+        }
+    }
 }

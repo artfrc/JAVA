@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "pointers")
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of="id")
 @AllArgsConstructor // cria um construtor com todos os atributos da classe
+@NoArgsConstructor
 public class Pointer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +34,11 @@ public class Pointer {
     private LocalDateTime timestamp;
     
     @Enumerated(EnumType.STRING)
-    private TypePointer typePointer;
+    private PointerType typePointer;
 
     // Um usuário pode ter vários pontos mas um ponto pode ter apenas um usuário
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 }

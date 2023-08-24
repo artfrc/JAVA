@@ -1,6 +1,6 @@
 package com.arthurfc.projetoponto.domain.pointers;
 
-public enum TypePointer {
+public enum PointerType {
     START,
     FINISH
 }
