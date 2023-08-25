@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.picpaysimplificado.dtos.UserDTO;
 import com.picpaysimplificado.picpaysimplificado.domain.user.User;
+import com.picpaysimplificado.repositories.UserRepository;
 import com.picpaysimplificado.services.UserService;
 
 @RestController()
@@ -20,17 +21,22 @@ import com.picpaysimplificado.services.UserService;
 public class UserController {
     
     @Autowired
-    private UserService userService;
-
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserDTO user) {
-        User newUser = userService.createUser(user);
-        return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
-    }
+    private UserRepository userRepository;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(UserDTO user) {
-        List<User> users = this.userService.getAllUsers();
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    public List<User> listAllUsers() {
+        return userRepository.findAll();
     }
+    
+    // @PostMapping
+    // public ResponseEntity<User> createUser(@RequestBody UserDTO user) {
+    //     User newUser = userService.createUser(user);
+    //     return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
+    // }
+
+    // @GetMapping
+    // public ResponseEntity<List<User>> getAllUsers(UserDTO user) {
+    //     List<User> users = this.userService.getAllUsers();
+    //     return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    // }
 }

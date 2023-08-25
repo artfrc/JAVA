@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjetopontoApplication<projetoponto>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.arthurfc.projetoponto.ProjetopontoApplication",
+            "projectName": "projetoponto",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

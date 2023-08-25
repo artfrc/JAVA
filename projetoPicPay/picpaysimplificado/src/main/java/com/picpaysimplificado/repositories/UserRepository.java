@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.picpaysimplificado.picpaysimplificado.domain.user.User;
 
 // Repositorios são usados para fazer operações com o banco de dados (as consultas)
-
 public interface UserRepository extends JpaRepository<User, Long>{
     Optional<User> findUserByDocument(String document); // Optional é usado para evitar o NullPointerException, pois pode ou não ter um usuário com o documento informado
 
