@@ -49,7 +49,7 @@ public class User {
         this.userType = data.userType();
         this.email = data.email();
         if(data.userType() == UserType.TRAINEE) {
-            this.workHoursDay = 6; 
+            this.workHoursDay = 6;
         } else {
             this.workHoursDay = 8;
         }

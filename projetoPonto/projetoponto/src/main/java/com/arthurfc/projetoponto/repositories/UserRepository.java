@@ -8,5 +8,4 @@ import com.arthurfc.projetoponto.domain.user.User;
 
 public interface UserRepository extends JpaRepository<User,Long> {
     Optional<User> findUserById(Long id);
-    Optional<User> findUserByDocument(String document);
 }

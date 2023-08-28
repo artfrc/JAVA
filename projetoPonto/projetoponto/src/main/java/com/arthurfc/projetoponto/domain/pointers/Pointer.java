@@ -1,7 +1,10 @@
 package com.arthurfc.projetoponto.domain.pointers;
 
+import java.time.LocalDateTime;
+
 import com.arthurfc.projetoponto.dtos.PointerDTO;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +28,13 @@ public class Pointer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Pointer(PointerDTO data) {
+    private LocalDateTime timestamp;
 
+    @Column(name = "user_id")
+    private Long userId;
+
+    public Pointer(PointerDTO data) {
+        this.timestamp = data.timestamp();
+        this.userId = data.user().getId();
     }
 }

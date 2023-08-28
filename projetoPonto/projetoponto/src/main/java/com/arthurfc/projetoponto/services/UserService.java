@@ -16,36 +16,29 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+        return userRepository.findAll();
     }
 
     public User findUserById(Long id) throws Exception {
-        return this.userRepository.findUserById(id).orElseThrow(() -> new Exception("Usuario nao encontrado"));
-    }
-
-    public User findUserByDocument(String document) throws Exception {
-        return this.userRepository.findUserByDocument(document).orElseThrow(() -> new Exception("Usuario nao encontrado"));
+        return userRepository.findById(id).orElseThrow(() -> new Exception("Usuario nao encontrado"));
     }
 
     public User createUser(UserDTO data) {
         User newUser = new User(data);
-        this.saveUser(newUser);
+        userRepository.save(newUser);
         return newUser;
     }
 
-    public void saveUser(User user) {
-        this.userRepository.save(user);
-    }
-
-    // public Double calculateMonthlySalary(User user, int month) {
-    //     // Optional<List<Pointer>> pointers = pointerRepository.findPointersByMonth(month);
-    //     // List<Pointer> listPointers = pointers.get();
+    // public Double calculateMonthlySalary(User user, int month) throws Exception {
+    //     findUserById(user.getId());
         
-    //     // if(listPointers.size() > 0) {
-    //     //     return user.getSalary();
-    //     // } else {
-    //     //     return 0.;
-    //     // }
-    //     return 0.;
+    //     Optional<List<Pointer>> pointers = pointerRepository.findPointersByMonth(month);
+    //     List<Pointer> listPointers = pointers.get();
+        
+    //     if(listPointers.size() > 0) {
+    //         return user.getSalary();
+    //     } else {
+    //         return 0.;
+    //     }
     // }
 }
