@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arthurfc.projetoponto.domain.pointers.Pointer;
-import com.arthurfc.projetoponto.domain.user.User;
 import com.arthurfc.projetoponto.dtos.PointerDTO;
 import com.arthurfc.projetoponto.repositories.PointerRepository;
 
@@ -18,6 +17,9 @@ public class PointerService {
     @Autowired
     private PointerRepository pointerRepository;
 
+    @Autowired
+    private UserService userService;
+
     public List<Pointer> getAllPointers() {
         return pointerRepository.findAll();
     }
@@ -26,7 +28,8 @@ public class PointerService {
         return pointerRepository.findPointersByMonth(month);
     }
 
-    public Pointer createPointer(User user) throws Exception {
+    public Pointer createPointer(Long id) throws Exception {
+        userService.findUserById(id);
 
         LocalDateTime currentTime = LocalDateTime.now();
 
@@ -38,7 +41,7 @@ public class PointerService {
         boolean isWithinPeriod = !currentTimeOnly.isBefore(startTime) && !currentTimeOnly.isAfter(endTime);
 
         if (isWithinPeriod) {
-            PointerDTO data = new PointerDTO(currentTime,user);
+            PointerDTO data = new PointerDTO(currentTime,id);
             Pointer newPointer = new Pointer(data);
             pointerRepository.save(newPointer);
             return newPointer;

@@ -1,6 +1,8 @@
 package com.arthurfc.projetoponto.controllers;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arthurfc.projetoponto.domain.pointers.Pointer;
-import com.arthurfc.projetoponto.domain.user.User;
 import com.arthurfc.projetoponto.services.PointerService;
 
 @RestController
@@ -23,8 +24,13 @@ public class PointerController {
     private PointerService pointerService;
 
     @PostMapping
-    public ResponseEntity<Pointer> createPointer(@RequestBody User user) throws Exception {
-        Pointer newPointer = pointerService.createPointer(user);
+    public ResponseEntity<Pointer> createPointer(@RequestBody Map<String,Long> requestBody) throws Exception {
+        Long userId = requestBody.get("userId");
+        if(userId == null) { // Não foi passado o ID no JSON
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Pointer newPointer = pointerService.createPointer(userId);
         return new ResponseEntity<Pointer>(newPointer,HttpStatus.CREATED);
     }
 

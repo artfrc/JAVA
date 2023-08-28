@@ -35,6 +35,6 @@ public class Pointer {
 
     public Pointer(PointerDTO data) {
         this.timestamp = data.timestamp();
-        this.userId = data.user().getId();
+        this.userId = data.userId();
     }
 }
