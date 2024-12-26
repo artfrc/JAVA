@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.artfc</groupId>
-	<artifactId>first-project-spring</artifactId>
+	<artifactId>gestao_projeto_vagas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>first-project-spring</name>
+	<name>gestao_projeto_vagas</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -29,8 +29,13 @@
 	<properties>
 		<java.version>23</java.version>
 	</properties>
-
 	<dependencies>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.36</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
