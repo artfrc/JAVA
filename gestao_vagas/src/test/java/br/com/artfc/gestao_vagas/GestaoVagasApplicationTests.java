@@ -1,10 +1,10 @@
-package br.com.artfc.gestao_projeto_vagas;
+package br.com.artfc.gestao_vagas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GestaoProjetoVagasApplicationTests {
+class GestaoVagasApplicationTests {
 
 	@Test
 	void contextLoads() {
