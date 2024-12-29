@@ -1,13 +1,14 @@
 package br.com.artfc.gestao_vagas.modules.candidate.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.artfc.gestao_vagas.modules.candidate.CandidateEntity;
-import br.com.artfc.gestao_vagas.modules.candidate.CandidateRepository;
+import br.com.artfc.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import jakarta.validation.Valid;
 
 @RestController
@@ -15,13 +16,21 @@ import jakarta.validation.Valid;
 public class CandidateController {
 
    @Autowired
-   private CandidateRepository candidateRepository;
+   private CreateCandidateUseCase createCandidateUseCase;
 
    @PostMapping("/create")
-   public CandidateEntity create(@Valid @RequestBody CandidateEntity candidate) {
+   public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidate) {
+      
+      try{
+         var result = this.createCandidateUseCase.execute(candidate);
 
-      return this.candidateRepository.save(candidate);
+         return ResponseEntity.ok().body(result);
 
+      } catch(Exception e){
+
+         return ResponseEntity.badRequest().body(e.getMessage());
+         
+      }
    }
    
 }
