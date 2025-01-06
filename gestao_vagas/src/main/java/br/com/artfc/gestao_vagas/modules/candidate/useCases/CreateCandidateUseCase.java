@@ -18,7 +18,7 @@ public class CreateCandidateUseCase {
       this.candidateRepository
       .findByUsernameOrEmail(candidate.getUsername(), candidate.getEmail())
       .ifPresent((user) -> {
-         throw new UserFoundException();
+         throw new UserFoundException("User already exists");
       });
 
       return this.candidateRepository.save(candidate);

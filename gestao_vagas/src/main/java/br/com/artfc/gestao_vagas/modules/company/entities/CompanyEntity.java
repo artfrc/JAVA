@@ -25,7 +25,7 @@ public class CompanyEntity {
    @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Username should contain only letters and numbers")
    private String username;
 
-   @Length(min = 6, max = 32, message = "Password should be between 6 and 32 characters")
+   @Length(min = 6, max = 64, message = "Password should be between 6 and 32 characters")
    private String password;
 
    @Email(message = "Email should be valid")
