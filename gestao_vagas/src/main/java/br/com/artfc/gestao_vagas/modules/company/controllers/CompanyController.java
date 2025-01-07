@@ -22,7 +22,7 @@ public class CompanyController {
    public ResponseEntity<Object> createCompany(@Valid @RequestBody CompanyEntity company) {
 
       try {
-         var result = this.createCompanyUseCase.execeute(company);
+         var result = this.createCompanyUseCase.execute(company);
 
          return ResponseEntity.ok().body(result);
 

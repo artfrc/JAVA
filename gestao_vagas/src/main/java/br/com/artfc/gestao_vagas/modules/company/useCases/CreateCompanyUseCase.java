@@ -17,7 +17,7 @@ public class CreateCompanyUseCase {
    @Autowired
    private PasswordEncoder passwordEncoder;
 
-   public CompanyEntity execeute(CompanyEntity companyEntity) {
+   public CompanyEntity execute(CompanyEntity companyEntity) {
       
       this.companyRepository
       .findByUsernameOrEmail(companyEntity.getUsername(), companyEntity.getEmail())
