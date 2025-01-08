@@ -13,8 +13,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "job")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class JobEntity {
 
    @Id
@@ -35,53 +43,5 @@ public class JobEntity {
 
    @CreationTimestamp
    private LocalDate createdAt;
-
-   public UUID getId() {
-      return id;
-   }
-
-   public void setId(UUID id) {
-      this.id = id;
-   }
-
-   public String getDescription() {
-      return description;
-   }
-
-   public void setDescription(String description) {
-      this.description = description;
-   }
-
-   public String getLevel() {
-      return level;
-   }
-
-   public void setLevel(String level) {
-      this.level = level;
-   }
-
-   public UUID getCompanyId() {
-      return companyId;
-   }
-
-   public void setCompanyId(UUID companyId) {
-      this.companyId = companyId;
-   }
-
-   public String getBenefits() {
-      return benefits;
-   }
-
-   public void setBenefits(String benefits) {
-      this.benefits = benefits;
-   }
-
-   public LocalDate getCreatedAt() {
-      return createdAt;
-   }
-
-   public void setCreatedAt(LocalDate createdAt) {
-      this.createdAt = createdAt;
-   }
-   
+      
 }
