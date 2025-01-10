@@ -21,7 +21,7 @@ public class SecurityConfig {
           .authorizeHttpRequests(auth -> {
             auth.requestMatchers("/candidates/*").permitAll()
                .requestMatchers("/company/*").permitAll()
-               .requestMatchers("/auth/company").permitAll();
+               .requestMatchers("/auth/*").permitAll();
             auth.anyRequest().authenticated();
           })
           .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);

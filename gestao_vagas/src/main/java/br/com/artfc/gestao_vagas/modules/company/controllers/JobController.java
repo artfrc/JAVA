@@ -25,13 +25,12 @@ public class JobController {
    public JobEntity create(@Valid @RequestBody CreateJobDTO job, HttpServletRequest request) {
 
          var companyId = request.getAttribute("company_id");
-         var jobEntity = JobEntity.builder()
-         .description(job.getDescription())
-         .benefits(job.getBenefits())
-         .companyId(UUID.fromString(companyId.toString()))
-         .level(job.getLevel()) 
-         .build();
-         
+         var jobEntity = new JobEntity(
+            job.getDescription(),
+            job.getLevel(),
+            job.getBenefits(),
+            UUID.fromString(companyId.toString())
+         );
          return this.createJobUseCase.execute(jobEntity);
    }
    
