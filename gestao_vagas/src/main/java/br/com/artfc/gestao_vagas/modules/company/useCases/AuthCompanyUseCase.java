@@ -2,6 +2,7 @@ package br.com.artfc.gestao_vagas.modules.company.useCases;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 
 import javax.naming.AuthenticationException;
 
@@ -14,6 +15,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
 import br.com.artfc.gestao_vagas.exceptions.UserFoundException;
+import br.com.artfc.gestao_vagas.modules.company.dto.AuthCompanyResponseDTO;
 import br.com.artfc.gestao_vagas.modules.company.dto.CompanyDTO;
 import br.com.artfc.gestao_vagas.modules.company.repositories.CompanyRepository;
 
@@ -29,7 +31,7 @@ public class AuthCompanyUseCase {
    @Value("${security.token.secret}")
    private String secretKey; 
 
-   public String execute(CompanyDTO companyDTO) throws AuthenticationException {
+   public AuthCompanyResponseDTO execute(CompanyDTO companyDTO) throws AuthenticationException {
 
       var company = this.repository.findByUsername(companyDTO.getUsername())
          .orElseThrow(() -> {
@@ -42,12 +44,21 @@ public class AuthCompanyUseCase {
          throw new AuthenticationException("Company/password not found");
       } else {
          Algorithm algorithm = Algorithm.HMAC256(secretKey);
+
+         var expiresAt = Instant.now().plus(Duration.ofHours(2));
+
          var token = JWT.create().withIssuer("javagas")
          .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
             .withSubject(company.getId().toString())
+            .withExpiresAt(expiresAt)
+            .withClaim("roles", Arrays.asList("COMPANY"))
             .sign(algorithm);
 
-         return token;
+         AuthCompanyResponseDTO response = new AuthCompanyResponseDTO(
+            token,
+            expiresAt.toEpochMilli());
+
+         return response;
       }
    }
 }

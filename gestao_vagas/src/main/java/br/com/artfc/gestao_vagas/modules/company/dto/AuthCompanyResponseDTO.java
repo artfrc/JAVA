@@ -1,16 +1,17 @@
-package br.com.artfc.gestao_vagas.modules.candidate.dto;
+package br.com.artfc.gestao_vagas.modules.company.dto;
 
-public class AuthCandidateResponseDTO {
-   
+
+public class AuthCompanyResponseDTO {
+
    private String accessToken;
    private Long expiresAt;
    
-   public AuthCandidateResponseDTO(String accessToken, Long expiresAt) {
+   public AuthCompanyResponseDTO(String accessToken, Long expiresAt) {
       this.accessToken = accessToken;
       this.expiresAt = expiresAt;
    }
 
-   public AuthCandidateResponseDTO() {
+   public AuthCompanyResponseDTO() {
    }
 
    public String getAccessToken() {
@@ -28,5 +29,4 @@ public class AuthCandidateResponseDTO {
    public void setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
    }
-
 }
