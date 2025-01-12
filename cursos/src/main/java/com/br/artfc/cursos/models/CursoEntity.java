@@ -1,4 +1,4 @@
-package com.br.artfc.cursos.entities;
+package com.br.artfc.cursos.models;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -34,8 +34,7 @@ public class CursoEntity {
    
    public CursoEntity() {}
 
-   public CursoEntity(UUID id, String name, String category) {
-      this.id = id;
+   public CursoEntity(String name, String category) {
       this.name = name;
       this.category = category;
       this.active = true;
