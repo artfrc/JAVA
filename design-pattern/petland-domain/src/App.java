@@ -54,15 +54,5 @@ public class App {
         atendimento.setServico(produtoServico);
         atendimento.setValor(produtoServico.getValor());
 
-        System.out.println("Id atendimento: " + atendimento.getId());
-        System.out.println("Data atendimento: " + atendimento.getData());
-        System.out.println("Hora atendimento: " + atendimento.getHora());
-        System.out.println("Descrição atendimento: " + atendimento.getDescricao());
-        System.out.println("Status atendimento: " + atendimento.getStatus());
-        System.out.println("Tipo atendimento: " + atendimento.getTipo());
-        System.out.println("Solicitante atendimento: " + atendimento.getSolicitante().getNome());
-        System.out.println("Paciente atendimento: " + atendimento.getPaciente().getNome());
-        System.out.println("Serviço atendimento: " + atendimento.getServico().getNome());
-        System.out.println("Valor atendimento: " + atendimento.getValor());
     }
 }
