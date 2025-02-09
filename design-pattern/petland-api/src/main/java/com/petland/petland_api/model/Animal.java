@@ -65,6 +65,4 @@ public class Animal {
       this.especie = especie;
    }
 
-   
-   
 }
