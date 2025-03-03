@@ -1,6 +1,6 @@
 public class Utilities {
 
-   private String[] leftShifts = new String[17];
+   private String[] leftShifts = new String[17]; // posicao 0 é usada para armazenar a chave permutada
    private String[] SubKeys = new String[16];
 
    public Utilities() {}
@@ -52,7 +52,7 @@ public class Utilities {
       return entry.substring(entry.length() / 2);
    }
 
-   public String LeftShifts(Utilities utilities, int round) {
+   public void LeftShifts(Utilities utilities, int round) {
       int numberOfShifts = 0;
       if(round == 1 || round == 2 || round == 9 || round == 16) {
          numberOfShifts = 1;
@@ -65,9 +65,9 @@ public class Utilities {
 
       for(int i = 0; i < numberOfShifts; i++) {
          leftHalf = leftHalf.substring(1) + leftHalf.charAt(0);
-         System.out.println(">> C" + round + " = " + leftHalf);
+         System.out.println(">> C" + round + " = " + leftHalf + " ||" + " Length: " + leftHalf.length());
          rightHalf = rightHalf.substring(1) + rightHalf.charAt(0);
-         System.out.println(">> D" + round + " = " + rightHalf + "\n");
+         System.out.println(">> D" + round + " = " + rightHalf + " ||" + " Length: " + rightHalf.length());
  
          /* 
             .substring(1) - pega a string a partir do segundo caractere
@@ -77,10 +77,9 @@ public class Utilities {
       }
 
       AddLeftShift(round, leftHalf + rightHalf);
-      return utilities.GetLeftShift(round);              
    }
 
-   public String generateSubKey(String leftKey) {
+   public void generateSubKey(String leftKey) {
       int[][] PcTwo = {
          { 14, 17, 11, 24, 1, 5 },
          { 3, 28, 15, 6, 21, 10 },
@@ -99,8 +98,7 @@ public class Utilities {
             subKey += leftKey.charAt(PcTwo[i][j] - 1);
          }
       }
-
-      return subKey;
+      System.out.println(">> Subkey = " + subKey + " || Length: " + subKey.length() + "\n");
    }
    
 }
