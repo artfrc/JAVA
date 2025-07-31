@@ -20,7 +20,7 @@ public class DlrController {
     private DlrService dlrService;
 
     @GetMapping
-    public ResponseEntity<List<DlrResponseDTO>> getDlrs(
+            public ResponseEntity<List<DlrResponseDTO>> getDlrs(
             @RequestParam(required = false) String sourceAddr,
             @RequestParam(required = false) String destinationAddr,
             @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date submissionDate,

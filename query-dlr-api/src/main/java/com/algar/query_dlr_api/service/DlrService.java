@@ -1,6 +1,5 @@
 package com.algar.query_dlr_api.service;
 
-import com.algar.query_dlr_api.exception.BadRequestException;
 import com.algar.query_dlr_api.model.Dlr;
 import com.algar.query_dlr_api.model.DlrResponseDTO;
 import com.algar.query_dlr_api.model.ServiceType;
@@ -23,6 +22,9 @@ public class DlrService {
     @Autowired
     private DlrRepository dlrRepository;
 
+    @Autowired
+    private DateService dateService;
+
     public ResponseEntity<List<DlrResponseDTO>> getDlrs(
             String sourceAddr,
             String destinationAddr,
@@ -33,9 +35,10 @@ public class DlrService {
         Specification<Dlr> spec = (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
+            dateService.validateDates(submissionDate, endDate);
+
             predicates.add(cb.equal(root.get("serviceType"), ServiceType.DLR));
 
-            validateDates(submissionDate, endDate);
 
             if(sourceAddr != null) {
                 predicates.add(cb.equal(root.get("sourceAddr"), sourceAddr));
@@ -77,23 +80,6 @@ public class DlrService {
         }
 
             return response;
-    }
-
-    private void validateDates(Date submissionDate, Date endDate) {
-        Date currentDate = new Date();
-
-        // Validação de datas futuras
-        if (submissionDate != null && submissionDate.after(currentDate)) {
-            throw new BadRequestException("Submission date cannot be in the future.");
-        }
-
-        if (endDate != null && endDate.after(currentDate)) {
-            throw new BadRequestException("End date cannot be in the future.");
-        }
-
-        if (submissionDate != null && endDate != null && submissionDate.after(endDate)) {
-            throw new BadRequestException("Submission date must be before end date.");
-        }
     }
 
 }
