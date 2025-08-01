@@ -1,0 +1,24 @@
+CONFIGS INTELLIJ
+
+VARIAVEIS DE AMBIENTE
+
+estar na classe main > run with paramters > add variaveis de ambiente e aplicar
+
+PROPERTIES
+
+mesmo local do anterior > modiy options > vm options > ao lado da versao do java: -Dspring.profiles.active={PROERTIES}
+exemplo: tem o application-prod.properties > -Dspring.profiles.active={prod}
+
+fazendo isso via linha de comando:
+java -jar -Dspring.profiles.active={prod} seu-arquivo.jar
+
+Usando a variável de ambiente SPRING_PROFILES_ACTIVE:
+
+export SPRING_PROFILES_ACTIVE={PROFILE}
+java -jar seu-arquivo.jar
+
+Passando como argumento de linha de comando:
+java -jar seu-arquivo.jar --spring.profiles.active={PROFILE}
+Ex: java -jar meu-projeto.jar --spring.profiles.active=dev
+
+1:37 https://www.youtube.com/watch?v=GPsMzeuOJlE&list=UUMOpKvMmsF6QrkVr_zWaLGK-A&index=1
