@@ -63,7 +63,7 @@ class DlrServiceTest {
     void shouldReturnEmptyList_WhenSourceAddrDoesNotMatchAnyRecord() {
 
         String SourceAddr = "123456";
-        List<Dlr> dlrList = Collections.EMPTY_LIST;
+        List<Dlr> dlrList = Collections.emptyList();
         Page<Dlr> dlrPage = new PageImpl<>(dlrList, pageable, dlrList.size());
 
         when(dlrRepository.findAll(any(Specification.class), eq(pageable))).thenReturn(dlrPage);
