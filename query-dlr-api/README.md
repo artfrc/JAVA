@@ -129,3 +129,35 @@ curl -X GET "http://localhost:8080/dlr?submissionDate=33-12-2026"
 ⚠️ **Atenção**: o campo `submissionDate` deve estar no formato **dd-MM-yyyy**, com datas válidas (por exemplo, `31-12-2025`).
 
 ---
+
+# 🧪 Testes
+
+---
+
+## 📂 Estrutura dos Testes
+
+Os testes são responsáveis por verificar diferentes cenários de busca de DLRs, validação de datas e tratamento de exceções.
+
+### 📋 Tabela de Testes
+
+| ✅ Teste | 📝 Descrição |
+|----------|-------------|
+| **shouldReturnEmptyList_WhenSourceAddrDoesNotMatchAnyRecord** | Verifica se retorna lista vazia quando nenhum DLR é encontrado para o `SourceAddr`. |
+| **shouldReturnAllDlrs_WhenNoFiltersProvided** | Garante que todos os DLRs são retornados quando nenhum filtro é aplicado. |
+| **shouldReturnDlrsFilteredBySourceAddr_WhenOnlySourceAddrIsProvided** | Testa a filtragem de DLRs apenas pelo `SourceAddr`. |
+| **shouldReturnDlrsFilteredByDestinationAddr_WhenOnlyDestinationAddrIsProvided** | Testa a filtragem de DLRs apenas pelo `DestinationAddr`. |
+| **shouldReturnDlrsFilteredBySubmissionAndEndDate_WhenBothAreProvided** | Verifica busca de DLRs quando datas de submissão e final são informadas. |
+| **shouldReturnDlrsFilteredBySubmissionDate_WhenOnlySubmissionDateIsProvided** | Testa busca quando apenas a data de submissão é passada. |
+| **shouldReturnDlrsFilteredByEndDate_WhenOnlyEndDateIsProvided** | Testa busca quando apenas a data final é passada. |
+| **shouldReturnDlrsFilteredBySourceAndDestinationAddr_WhenBothAreProvided** | Testa busca quando `SourceAddr` e `DestinationAddr` são informados juntos. |
+| **shouldReturnDlrsFilteredByAllFilters** | Garante que todos os filtros combinados retornam os DLRs corretamente. |
+| **shouldReturnThrowBadRequestExceptionBecauseOfFutureDate** | Valida se é lançada `BadRequestException` quando a data informada está no futuro. |
+
+---
+
+## 🚀 Como Executar os Testes
+
+Para rodar os testes localmente, execute:
+
+```bash
+mvn test
