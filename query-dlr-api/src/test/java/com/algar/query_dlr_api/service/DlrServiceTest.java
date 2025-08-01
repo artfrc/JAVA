@@ -1,5 +1,6 @@
 package com.algar.query_dlr_api.service;
 
+import com.algar.query_dlr_api.exception.BadRequestException;
 import com.algar.query_dlr_api.model.DeliveryStatus;
 import com.algar.query_dlr_api.model.Dlr;
 import com.algar.query_dlr_api.model.DlrResponseDTO;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +39,6 @@ class DlrServiceTest {
     @Mock
     private DlrRepository dlrRepository;
 
-    @Mock
     private  DateService dateService;
 
     @InjectMocks
@@ -46,6 +47,7 @@ class DlrServiceTest {
     @BeforeEach
     void setUp() {
         pageable = PageRequest.of(0, 5);
+        dateService = new DateService();
 
         dlr = createDlr("1", "10", "12345", "0987654321");
         dlrResponseDTO = new DlrResponseDTO(
@@ -219,7 +221,7 @@ class DlrServiceTest {
     }
 
     @Test
-    void shouldReturnDlrsFilteredByAllFilters() {
+        void shouldReturnDlrsFilteredByAllFilters() {
 
         String SourceAddr = "12345";
         String DestinationAddr = "0987654321";
@@ -241,6 +243,18 @@ class DlrServiceTest {
         assertDoesNotThrow(() -> {
             dateService.validateDates(submissionDate, endDate);
         });
+    }
+
+    @Test
+    void shouldReturnThrowBadRequestExceptionBecauseOfFutureDate() {
+        Calendar day = Calendar.getInstance();
+        day.add(Calendar.YEAR,1);
+        Date submissionDate = day.getTime();
+        assertThrows(BadRequestException.class, () -> {
+            dateService.validateDates(submissionDate, null);
+        });
+
+        verify(dlrRepository, times(0)).findAll(any(Specification.class), eq(pageable));
     }
 
 
