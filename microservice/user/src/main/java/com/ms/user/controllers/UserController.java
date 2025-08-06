@@ -3,7 +3,9 @@ package com.ms.user.controllers;
 
 import com.ms.user.models.UserDTO;
 import com.ms.user.models.UserModel;
+import com.ms.user.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
+    private UserService service;
+
     @PostMapping
     public ResponseEntity<UserModel> saveUser(@RequestBody @Valid UserDTO userDTO) {
-
-
-        return ResponseEntity.status(HttpStatus.CREATED).body();
+        var user = service.saveUser(userDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 }
