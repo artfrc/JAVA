@@ -20,7 +20,7 @@ public class OrderService {
        this.orderRepository = orderRepository;
    }
 
-   public ResponseEntity<String> saveOrder(Order order) {
+   public Order saveOrder(Order order) {
 
        if(order.getItens() != null) {
            for(OrderedItem item : order.getItens()) {
@@ -28,7 +28,9 @@ public class OrderService {
            }
        }
 
-       return ResponseEntity.status(HttpStatus.CREATED).body("Order created with successfully.");
+       orderRepository.save(order);
+
+       return order;
    }
 
    public ResponseEntity<List<Order>> getAllOrders() {
