@@ -3,6 +3,7 @@ package com.training.demo.controller;
 import com.training.demo.model.Client;
 import com.training.demo.model.ClientResponse;
 import com.training.demo.service.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class ClientController {
     private ClientService clientService;
 
     @PostMapping
-    public ResponseEntity<ClientResponse> addClient(@RequestBody Client c) {
+    public ResponseEntity<ClientResponse> addClient(@Valid @RequestBody  Client c) {
          return ResponseEntity.status(HttpStatus.CREATED).body(clientService.addClient(c));
     }
 
