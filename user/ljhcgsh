@@ -1,0 +1,54 @@
+package br.com.ctbc.planeta.application.bloqueioLDI.persistence.dao.hibernate;
+
+import java.util.Arrays;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.criterion.CriteriaQuery;
+import org.hibernate.criterion.SimpleExpression;
+import org.hibernate.dialect.Dialect;
+import org.hibernate.dialect.function.SQLFunction;
+
+public class InverseLikeExpression extends SimpleExpression{
+    /**
+     *
+     */
+
+    private static Logger log = Logger.getLogger(InverseLikeExpression.class);
+    private static final long serialVersionUID = 2808124609471259390L;
+    private static final String CONST_HQL_FUNCTION_NAME_CONCAT = "concat";
+    private static final String CONST_LIKE = " like ";
+    private static final String CONST_LIKE_SUFFIX = "''"; //colocar % caso nao esteja no conteudo do campo
+
+
+    private final String propertyName;
+
+    protected InverseLikeExpression(String pPropertyName, Object pValue) {
+        super(pPropertyName, pValue, CONST_LIKE);
+        propertyName = pPropertyName;
+    }
+
+    @Override
+    public String toSqlString(Criteria criteria, CriteriaQuery criteriaQuery) throws HibernateException {
+        String[] columns = criteriaQuery.getColumnsUsingProjection(criteria, propertyName);
+        Dialect dialect = criteriaQuery.getFactory().getDialect();
+        SQLFunction concatFunction = (SQLFunction) dialect.getFunctions().get(CONST_HQL_FUNCTION_NAME_CONCAT);
+
+        StringBuffer fragment = new StringBuffer();
+        if (columns.length>1) fragment.append('(');
+        for ( int i=0; i<columns.length; i++ ) {
+            String fieldName = concatFunction.render(Arrays.asList(new Object[] {columns[i], CONST_LIKE_SUFFIX}), criteriaQuery.getFactory());
+            fragment.append("?").append( getOp() ).append(fieldName);
+            if ( i<columns.length-1 ) fragment.append(" and ");
+        }
+        if (columns.length>1) fragment.append(')');
+
+        return fragment.toString();
+    }
+
+
+    public static InverseLikeExpression invLike(String paramA, String paramB) {
+        return new InverseLikeExpression(paramA, paramB);
+    }
+}
