@@ -11,7 +11,6 @@ public class ClientResponse {
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
         private LocalDate date;
-
         private Integer status;
         private Integer count;
         private List<Client> clientList;

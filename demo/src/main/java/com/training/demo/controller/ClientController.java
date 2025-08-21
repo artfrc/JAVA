@@ -19,4 +19,9 @@ public class ClientController {
     public ResponseEntity<ClientResponse> addClient(@RequestBody Client c) {
          return ResponseEntity.status(HttpStatus.CREATED).body(clientService.addClient(c));
     }
+
+    @GetMapping
+    public ResponseEntity<ClientResponse> getAllClients() {
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.getAllClients());
+    }
 }

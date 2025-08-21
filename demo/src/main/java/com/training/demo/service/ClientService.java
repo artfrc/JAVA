@@ -5,6 +5,7 @@ import com.training.demo.model.ClientResponse;
 import com.training.demo.repositorie.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,6 +25,15 @@ public class ClientService {
         return new ClientResponse(
                 "Client created succesfully.",
                 HttpStatus.CREATED.value(),
+                clientList.size(),
+                clientList);
+    }
+
+    public ClientResponse getAllClients() {
+        List<Client> clientList = clientRepository.findAll();
+        return new ClientResponse(
+                "All customers were picked up",
+                HttpStatus.OK.value(),
                 clientList.size(),
                 clientList);
     }
