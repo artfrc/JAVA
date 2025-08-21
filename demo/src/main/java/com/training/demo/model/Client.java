@@ -13,8 +13,9 @@ public class Client {
     private UUID id;
     private String name;
 
-    public Client(UUID id, String name) {
-        this.id = id;
+    public Client() {}
+
+    public Client(String name) {
         this.name = name;
     }
 
