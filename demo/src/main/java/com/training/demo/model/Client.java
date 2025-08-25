@@ -20,7 +20,6 @@ public class Client {
     private String name;
 
     @NotBlank(message = "email is mandatory.")
-    // TO DO: arrumar a mensagem de erro quando essa anotacao for violada
     @Email(message = "Invalid email.")
     @Column(unique = true)
     private String email;

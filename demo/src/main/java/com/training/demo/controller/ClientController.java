@@ -25,4 +25,9 @@ public class ClientController {
     public ResponseEntity<ClientResponse> getAllClients() {
         return ResponseEntity.status(HttpStatus.OK).body(clientService.getAllClients());
     }
+
+    @GetMapping("/email")
+    public ResponseEntity<ClientResponse> getClientByEmail(@RequestParam String email) {
+        return ResponseEntity.status(HttpStatus.OK).body(clientService.getClientByEmail(email));
+    }
 }

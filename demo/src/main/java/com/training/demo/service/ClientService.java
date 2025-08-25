@@ -1,5 +1,6 @@
 package com.training.demo.service;
 
+import com.training.demo.exception.ClientNotFound;
 import com.training.demo.model.Client;
 import com.training.demo.model.ClientResponse;
 import com.training.demo.repositorie.ClientRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -24,18 +26,32 @@ public class ClientService {
         c.setUpdateDate(LocalDate.now());
         clientRepository.save(c);
         List<Client> clientList = List.of(c);
-        return new ClientResponse(
-                "Customer created successfully.",
-                clientList.size(),
-                clientList);
+        String message = "Customer created successfully.";
+        return convertToClientResponse(message, 1, clientList);
 
     }
 
     public ClientResponse getAllClients() {
         List<Client> clientList = clientRepository.findAll();
+        String message = "All customers have been retrieved.";
+        return convertToClientResponse(message, clientList.size(), clientList);
+
+    }
+
+    public ClientResponse getClientByEmail(String email) {
+        List<Client> client = Collections.singletonList(clientRepository.findByEmail(email)
+                .orElseThrow(() -> new ClientNotFound("Client not found.")));
+
+        String message = "Custumer have been retrieved.";
+
+        return convertToClientResponse(message, 1, client);
+
+    }
+
+    private ClientResponse convertToClientResponse(String message, Integer sz, List<Client> list) {
         return new ClientResponse(
-                "All customers have been retrieved.",
-                clientList.size(),
-                clientList);
+                message,
+                sz,
+                list);
     }
 }
