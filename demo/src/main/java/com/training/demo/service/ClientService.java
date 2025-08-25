@@ -20,20 +20,21 @@ public class ClientService {
     private ClientRepository clientRepository;
 
     public ClientResponse addClient(Client c) {
+        c.setRegistrationDate(LocalDate.now());
+        c.setUpdateDate(LocalDate.now());
         clientRepository.save(c);
         List<Client> clientList = List.of(c);
         return new ClientResponse(
-                "Client created succesfully.",
-                HttpStatus.CREATED.value(),
+                "Customer created successfully.",
                 clientList.size(),
                 clientList);
+
     }
 
     public ClientResponse getAllClients() {
         List<Client> clientList = clientRepository.findAll();
         return new ClientResponse(
-                "All customers were picked up",
-                HttpStatus.OK.value(),
+                "All customers have been retrieved.",
                 clientList.size(),
                 clientList);
     }

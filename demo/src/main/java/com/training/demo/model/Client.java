@@ -1,11 +1,11 @@
 package com.training.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.processing.Pattern;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -25,11 +25,18 @@ public class Client {
     @Column(unique = true)
     private String email;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate registrationDate;
+
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate updateDate;
+
     public Client() {}
 
     public Client(String name, String email) {
         this.name = name;
         this.email = email;
+        this.registrationDate = LocalDate.now();
     }
 
     public UUID getId() {
@@ -54,5 +61,21 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate){
+        this.registrationDate = registrationDate;
+    }
+
+    public LocalDate getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 }
