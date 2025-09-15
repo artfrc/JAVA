@@ -5,6 +5,10 @@ public class Threads {
 
     public static void main(String[] args) throws InterruptedException {
 
+        MyRunnable runnable = new MyRunnable();
+        int n = 3;
+        List<Thread> threads = new ArrayList<>();
+
         // atual
 //        Thread t = Thread.currentThread();
 //        System.out.println(t.getName());
@@ -18,9 +22,9 @@ public class Threads {
 //        t2.start();
 
         //Synchronized
-        int n = 5, count = -1;
-        MyRunnable runnable = new MyRunnable();
-        List<Thread> threads = new ArrayList<>();
+        /*
+         * Evitar usar, temos outros modos de fazer isso a seguir...
+        */
 
         for(int i =  0; i < n; i++) {
             Thread t = new Thread(runnable);
@@ -32,9 +36,9 @@ public class Threads {
             t.join();
         }
 
-        System.out.println("Valor final: " + runnable.getCount());
-        System.out.println("Valor esperado: " + n*2);
-
+        for(String item : runnable.getMyList()) {
+            System.out.println(item);
+        }
 
     }
 }

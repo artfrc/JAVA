@@ -1,25 +1,27 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class MyRunnable implements Runnable {
-    private  int count;
+    private List<String> myList = new ArrayList<>();
 
     public MyRunnable() {
-        this.count = -1;
+        this.myList = Collections.synchronizedList(this.myList);
     }
 
     @Override
-    public synchronized void run() {
-        String name = Thread.currentThread().getName();
-        for(int i = 0; i < 2; i++) {
-            count++;
-            System.out.println(name + ": " + count);
+    public void run() {
+
+        int n = 1;
+
+        for(int i = 0; i < n; i++) {
+            String name = Thread.currentThread().getName();
+            myList.add("Hello World! " + name);
         }
 
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
+    public List<String> getMyList() {
+        return myList;
     }
 }
