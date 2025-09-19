@@ -1,27 +1,19 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyRunnable implements Runnable {
-    private List<String> myList = new ArrayList<>();
+    private AtomicInteger count =  new AtomicInteger(-1);
 
-    public MyRunnable() {
-        this.myList = Collections.synchronizedList(this.myList);
-    }
+    public MyRunnable(){}
 
     @Override
     public void run() {
 
-        int n = 1;
-
-        for(int i = 0; i < n; i++) {
-            String name = Thread.currentThread().getName();
-            myList.add("Hello World! " + name);
-        }
+        String name = Thread.currentThread().getName();
+        System.out.println(name + ": " + this.count.incrementAndGet());
 
     }
 
-    public List<String> getMyList() {
-        return myList;
+    public AtomicInteger getCount() {
+        return count;
     }
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import jakarta.persistence.criteria.Predicate;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class DlrService {
@@ -63,6 +64,10 @@ public class DlrService {
         List<Dlr> dlrs = page.getContent();
 
         return ResponseEntity.ok(convertDlrToDlrResponseDTO(dlrs));
+    }
+
+    private Boolean getDlrByUUID(String responseId) {
+
     }
 
     private List<DlrResponseDTO> convertDlrToDlrResponseDTO(List<Dlr> dlrs) {

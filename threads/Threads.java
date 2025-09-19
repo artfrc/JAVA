@@ -26,6 +26,8 @@ public class Threads {
          * Evitar usar, temos outros modos de fazer isso a seguir...
         */
 
+        //Synchronized com collections...
+
         for(int i =  0; i < n; i++) {
             Thread t = new Thread(runnable);
             threads.add(t);
@@ -36,9 +38,11 @@ public class Threads {
             t.join();
         }
 
-        for(String item : runnable.getMyList()) {
-            System.out.println(item);
-        }
+//        for(String item : runnable.getMyList()) {
+//            System.out.println(item);
+//        }
+
+        // Classes atomicas
 
     }
 }

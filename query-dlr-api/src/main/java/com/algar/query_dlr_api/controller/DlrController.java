@@ -1,5 +1,6 @@
 package com.algar.query_dlr_api.controller;
 
+import com.algar.query_dlr_api.model.Dlr;
 import com.algar.query_dlr_api.model.DlrResponseDTO;
 
 import com.algar.query_dlr_api.service.DlrService;
@@ -20,13 +21,13 @@ public class DlrController {
     private DlrService dlrService;
 
     @GetMapping
-            public ResponseEntity<List<DlrResponseDTO>> getDlrs(
-            @RequestParam(required = false) String sourceAddr,
-            @RequestParam(required = false) String destinationAddr,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date submissionDate,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate,
-            Pageable pageable) {
-        return dlrService.getDlrs(sourceAddr, destinationAddr,submissionDate, endDate, pageable);
+    public ResponseEntity<List<DlrResponseDTO>> getDlrs(
+    @RequestParam(required = false) String sourceAddr,
+    @RequestParam(required = false) String destinationAddr,
+    @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date submissionDate,
+    @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate,
+    Pageable pageable) {
+return dlrService.getDlrs(sourceAddr, destinationAddr,submissionDate, endDate, pageable);
     }
 
 }
