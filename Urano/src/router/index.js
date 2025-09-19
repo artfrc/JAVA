@@ -19,7 +19,7 @@ const router = createRouter({
                     component: () => import('@/views/Clients.vue')
                 },
                 {
-                    path: '/search-dlr',
+                    path: '/find-dlr',
                     name: 'searchDlr',
                     component: () => import('@/views/SearchDlr.vue')
                 },

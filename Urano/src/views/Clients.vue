@@ -1,10 +1,14 @@
 <template>
-    <div class="card flex justify-center">
-        <Button 
-            label="Adicionar cliente" 
-            icon="pi pi-plus" 
-            @click="openModal" 
-        />
+
+    <div class="card">
+
+        <div class="flex justify-end">
+            <Button 
+                label="Adicionar cliente" 
+                icon="pi pi-plus" 
+                @click="openModal" 
+            />
+        </div>
         
         <Dialog 
             v-model:visible="visible" 
@@ -46,6 +50,8 @@
                         class="w-full"
                     />
                 </div>
+
+                
             </div>
             
             <template #footer>
@@ -55,17 +61,21 @@
                     @click="closeModal" 
                     class="p-button-text mr-2" 
                 />
-                <Button 
-                    label="Salvar" 
-                    icon="pi pi-check" 
-                    @click="saveConfiguration" 
-                    :disabled="!isFormValid"
+                
+                <Button label="Salvar" 
+                icon="pi pi-check" 
+                @click="saveClient" 
+                :disabled="!isFormValid"
                     autofocus 
                 />
+                
             </template>
         </Dialog>
+
+        <Toast group="br" position="top-right" />
     </div>
 </template>
+
 
 <script setup>
 import { ref, reactive, computed } from 'vue';
@@ -73,7 +83,9 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
+import { useToast } from "primevue/usetoast";
 
+const toast = useToast();
 const visible = ref(false);
 const formData = reactive({
     name: '',
@@ -84,6 +96,7 @@ const formData = reactive({
 const typeOptions = [
    { label: '', value: null},
     { label: 'SMSC', value: 'SMSC' },
+    { label: 'SENSEDIA', value: 'SENSEDIA' },
     { label: 'NO_AUTH', value: 'NO_AUTH' }
 ];
 
@@ -106,9 +119,10 @@ const resetForm = () => {
     formData.type = null;
 };
 
-const saveConfiguration = () => {
+const saveClient = () => {
+    toast.add({ severity: 'success', detail: 'Cliente inserido com sucesso!', group: 'br', life: 1000 });
     console.log('Configuração salva:', formData);
-    // Sua lógica de salvamento aqui
     closeModal();
 };
+
 </script>

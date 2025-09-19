@@ -6,13 +6,13 @@ import AppMenuItem from './AppMenuItem.vue';
 const model = ref([
     {
         label: 'Urano',
-        // items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
+        items: [{ label: 'Visão geral', icon: 'pi pi-fw pi-home', to: '/' }]
     },
     {
         // label: 'UI Components',
         items: [
             { label: 'Clientes', icon: 'pi pi-user', to: '/clients' },
-            { label: 'Relatório de entregas', icon: 'pi pi-search', to: '/search-dlr' }
+            { label: 'Relatório de entregas', icon: 'pi pi-search', to: '/find-dlr' }
             // { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },
             // { label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/uikit/input' },
             // { label: 'Button', icon: 'pi pi-fw pi-mobile', to: '/uikit/button', class: 'rotated-icon' },
